@@ -16,4 +16,4 @@ jobs:
       - name: Install dependencies
         run: go get .
       - name: Test with Go
-        run: go test
+        run: go test ./...
