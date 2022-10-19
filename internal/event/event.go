@@ -66,7 +66,7 @@ type ListenerConverter struct {
 func (listenerConverter *ListenerConverter) ConvertToProcess(listener Listener) process.ProcessInterface {
 	return process.NewProcess(
 		fmt.Sprintf(
-			"%s %s %s",
+			"%s event:queue:consume %s %s",
 			listenerConverter.command,
 			listener.EventName,
 			listener.Identifier,
