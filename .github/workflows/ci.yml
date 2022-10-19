@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  - pull_request
+
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: './go.mod'
+      - name: Install dependencies
+        run: go get .
+      - name: Test with Go
+        run: go test
