@@ -6,7 +6,7 @@ import (
 )
 
 func TestGetAll(t *testing.T) {
-	listenerReader := NewListenerReader("cat ./grouped-listeners.json")
+	listenerReader := NewListenerReader("./console.sh")
 	listeners := listenerReader.GetAll()
 
 	if len(listeners) != 2 {

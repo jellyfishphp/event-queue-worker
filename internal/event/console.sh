@@ -1,3 +1,5 @@
+#!/bin/bash
+json=$(cat << EOF
 {
     "event1": [
         {
@@ -12,3 +14,7 @@
         }
     ]
 }
+EOF
+)
+
+echo $json

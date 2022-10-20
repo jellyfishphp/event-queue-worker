@@ -21,11 +21,11 @@ func main() {
 		jellyfishApplicationDir = os.Args[1]
 	}
 
-	consoleCommand := fmt.Sprintf("%s/vendor/bin/console", strings.TrimRight(jellyfishApplicationDir, "/"))
+	pathToConsoleApp := fmt.Sprintf("%s/vendor/bin/console", strings.TrimRight(jellyfishApplicationDir, "/"))
 
-	listenerReader := event.NewListenerReader(consoleCommand)
+	listenerReader := event.NewListenerReader(pathToConsoleApp)
 	listeners := listenerReader.GetAll()
-	listenerConverter := event.NewListenerConverter(consoleCommand)
+	listenerConverter := event.NewListenerConverter(pathToConsoleApp)
 	processes := listenerConverter.ConvertMultipleToProcesses(listeners)
 	eventQueueWorker := worker.NewEventQueueWorker(processes)
 
