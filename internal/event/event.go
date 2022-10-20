@@ -48,9 +48,9 @@ func (listenerReader *ListenerReader) GetAll() []Listener {
 	return ungroupedListeners
 }
 
-func NewListenerReader(command string) ListenerReaderInterface {
+func NewListenerReader(pathToConsoleApp string) ListenerReaderInterface {
 	return &ListenerReader{
-		command: command,
+		command: fmt.Sprintf("%s event:listener:get async", pathToConsoleApp),
 	}
 }
 
@@ -60,14 +60,14 @@ type ListenerConverterInterface interface {
 }
 
 type ListenerConverter struct {
-	command string
+	pathToConsoleApp string
 }
 
 func (listenerConverter *ListenerConverter) ConvertToProcess(listener Listener) process.ProcessInterface {
 	return process.NewProcess(
 		fmt.Sprintf(
-			"%s %s %s",
-			listenerConverter.command,
+			"%s event:queue:consume %s %s",
+			listenerConverter.pathToConsoleApp,
 			listener.EventName,
 			listener.Identifier,
 		),
@@ -84,8 +84,8 @@ func (listenerConverter *ListenerConverter) ConvertMultipleToProcesses(listeners
 	return processes
 }
 
-func NewListenerConverter(command string) ListenerConverterInterface {
+func NewListenerConverter(pathToConsoleApp string) ListenerConverterInterface {
 	return &ListenerConverter{
-		command: command,
+		pathToConsoleApp: pathToConsoleApp,
 	}
 }
